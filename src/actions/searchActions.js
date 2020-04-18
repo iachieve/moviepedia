@@ -22,7 +22,7 @@ let movies = [
 {Title: "How to Sell Drugs Online (Fast)", Year: "2019–", imdbID: "tt9184994", Type: "series", Poster: "https://m.media-amazon.com/images/M/MV5BMmFjYmFhMW…DhiNDAzXkEyXkFqcGdeQXVyNjkwMTY5OTk@._V1_SX300.jpg"}
 ];
 export const fetchMovies = text => dispatch => {
-    axios.get(`http://www.omdbapi.com/?apikey=${APIKey}&s=${text}`)
+    axios.get(`https://www.omdbapi.com/?apikey=${APIKey}&s=${text}`)
         .then(response => dispatch({
             type: FETCH_MOVIES,
             payload: response.data
@@ -30,7 +30,7 @@ export const fetchMovies = text => dispatch => {
 };
 
 export const fetchMovie = id => dispatch => {
-    axios.get(`http://www.omdbapi.com/?apikey=${APIKey}&i=${id}`)
+    axios.get(`https://www.omdbapi.com/?apikey=${APIKey}&i=${id}`)
         .then(response => dispatch({
             type: FETCH_MOVIE,
             payload: response.data
