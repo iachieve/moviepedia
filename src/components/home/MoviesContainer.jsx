@@ -3,21 +3,23 @@ import {connect} from 'react-redux';
 import MovieCard from "./MovieCard";
 import {CardGroup, Container} from "react-bootstrap";
 import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 class MoviesContainer extends Component {
     render() {
         const {movies} = this.props;
+        console.log(this.props);
         let content = '';
-        content = movies.length > 0 ?
-            movies.map((movie, idx)=> {
+        content = (movies.Search && movies.Search.length > 0) ?
+            movies.Search.map((movie, idx)=> {
                 return <MovieCard key={movie.imdbID} movie={movie}/>
             }):null;
         return (
-            <div>
-                <Row style={{ 'display': 'grid', 'gridTemplateColumns': 'repeat(auto-fill, 24%)', 'gridGap': '0.5rem'}}>
-                {content}
-                </Row>
-            </div>
+              <div>
+                  <Row className='movies-grid'>
+                          {content}
+                  </Row>
+              </div>
         );
     }
 }

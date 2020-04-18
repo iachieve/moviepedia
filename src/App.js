@@ -1,17 +1,17 @@
 import React from 'react';
-import Header from './components/layout/Header'
 import './App.css';
-import Footer from "./components/layout/Footer";
 import Landing from "./components/home/Landing";
-import {Container, Row} from "react-bootstrap";
+import {Container} from "react-bootstrap";
+import {Route} from "react-router-dom";
+import Movie from "./components/home/Movie";
+
 function App() {
   return (
     <div className="App">
-    <Header/>
     <Container>
-      <Landing/>
+      <Route exact path="/" component={Landing}/>
+      <Route path='/movie/:id' component={Movie}/>
     </Container>
-    <Footer/>
     </div>
   );
 }

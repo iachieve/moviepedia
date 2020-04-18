@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Jumbotron from "react-bootstrap/Jumbotron";
-import {searchMovie, fetchMovies} from '../../actions/searchActions';
+import {searchMovie, fetchMovies, setLoading} from '../../actions/searchActions';
 import {connect} from 'react-redux';
 
 class SearchForm extends Component {
@@ -18,7 +18,9 @@ class SearchForm extends Component {
 
     onSubmit = e => {
         e.preventDefault();
+        this.props.setLoading();
         this.props.fetchMovies(this.props.text);
+
     };
 
     render() {
@@ -48,4 +50,4 @@ class SearchForm extends Component {
 const mapStateToProps = state => ({
     text: state.movies.text
 });
-export default connect(mapStateToProps, {searchMovie, fetchMovies})(SearchForm);
+export default connect(mapStateToProps, {searchMovie, fetchMovies, setLoading})(SearchForm);

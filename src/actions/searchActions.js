@@ -1,5 +1,6 @@
-import {FETCH_MOVIES, SEARCH_MOVIE} from './types';
+import {FETCH_MOVIE, FETCH_MOVIES, SEARCH_MOVIE, LOADING} from './types';
 import axios from 'axios';
+
 import {APIKey} from '../APIKeys';
 export const searchMovie = text => dispatch => {
     dispatch({
@@ -7,7 +8,6 @@ export const searchMovie = text => dispatch => {
         payload: text
     })
 };
-
 
 let movies = [
 {Title: "Fast & Furious 6", Year: "2013", imdbID: "tt1905041", Type: "movie", Poster: "https://m.media-amazon.com/images/M/MV5BMTM3NTg2NDQzOF5BMl5BanBnXkFtZTcwNjc2NzQzOQ@@._V1_SX300.jpg"},
@@ -20,16 +20,26 @@ let movies = [
 {Title: "Fast Times at Ridgemont High", Year: "1982", imdbID: "tt0083929", Type: "movie", Poster: "https://m.media-amazon.com/images/M/MV5BYzBlZjE1MD…DBkZmI2XkEyXkFqcGdeQXVyNjQ2MjQ5NzM@._V1_SX300.jpg"},
 {Title: "Fast Food Nation", Year: "2006", imdbID: "tt0460792", Type: "movie", Poster: "https://m.media-amazon.com/images/M/MV5BYzM0ODQ5OG…DI1YTAwXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"},
 {Title: "How to Sell Drugs Online (Fast)", Year: "2019–", imdbID: "tt9184994", Type: "series", Poster: "https://m.media-amazon.com/images/M/MV5BMmFjYmFhMW…DhiNDAzXkEyXkFqcGdeQXVyNjkwMTY5OTk@._V1_SX300.jpg"}
-]
+];
 export const fetchMovies = text => dispatch => {
-    // axios.get(`http://www.omdbapi.com/?apikey=${APIKey}&s=${text}`)
-    //     .then(response => dispatch({
-    //         type: FETCH_MOVIES,
-    //         payload: response.data
-    //     }));
-
-    dispatch({
-        type: FETCH_MOVIES,
-        payload: movies
-    });
+    axios.get(`http://www.omdbapi.com/?apikey=${APIKey}&s=${text}`)
+        .then(response => dispatch({
+            type: FETCH_MOVIES,
+            payload: response.data
+        }));
 };
+
+export const fetchMovie = id => dispatch => {
+    axios.get(`http://www.omdbapi.com/?apikey=${APIKey}&i=${id}`)
+        .then(response => dispatch({
+            type: FETCH_MOVIE,
+            payload: response.data
+        }));
+};
+
+export const setLoading = () => {
+    return {
+        type: LOADING
+
+    }
+}
